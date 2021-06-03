@@ -168,10 +168,10 @@ String ackStatus = "ACK";
     int index = command.indexOf('=');
     String letter = command.substring(index+1);
     letter.trim();
-    if (letter.equals("f")) {
+    if (letter.equals("F")) {
       reverse = false;
     }
-    else if(letter.equals("t")) {
+    else if(letter.equals("T")) {
       reverse = true;
     }
   } 
@@ -186,11 +186,11 @@ String ackStatus = "ACK";
      int index = command.indexOf('=');
      String letter = command.substring(index+1);
      letter.trim();
-     if (letter.equals("f")) {
+     if (letter.equals("F")) {
        start = false;
         resetMotorPositions();
      }
-     else if(letter.equals("t")) {
+     else if(letter.equals("T")) {
        start = true;
      }  
   }
