@@ -144,28 +144,27 @@ void moveMotors() {
 }
 
 void runAttractionCommand(String command) {
+String ackStatus = "ACK";
+
   //Snelheids instellingen
   if(command.equals("speed=0")) {
     configureCarMotors(500.0, 900.0, 500);
-    Serial.println("ACK");
   }
-  if(command.equals("speed=1")) {
+  else if(command.equals("speed=1")) {
     configureCarMotors(750.0, 900.0, 750);
   }
-  if(command.equals("speed=2")) {
+  else if(command.equals("speed=2")) {
     configureCarMotors(1000.0, 900.0, 1000);
   }
-  if(command.equals("speed=3")) {
+  else if(command.equals("speed=3")) {
     configureCarMotors(1250.0, 900.0, 1250);
   }
-  if(command.equals("speed=4")) {
+  else if(command.equals("speed=4")) {
     configureCarMotors(1500.0, 900.0, 1500);
-  }else{
-    Serial.println("NACK");
   }
 
   //Reverse commando
-  if(command.startsWith("reverse=")) {
+  else if(command.startsWith("reverse=")) {
     int index = command.indexOf('=');
     String letter = command.substring(index+1);
     letter.trim();
@@ -178,12 +177,12 @@ void runAttractionCommand(String command) {
   } 
 
   //Geef de ldr waarde door
-  if (command.equals("send")) {
+  else if (command.equals("send")) {
     power = readPowerInPercent();
     Serial.println(readPowerInPercent());
   }
 
-   if(command.equals("power=")) {
+  else if(command.equals("power=")) {
      int index = command.indexOf('=');
      String letter = command.substring(index+1);
      letter.trim();
@@ -193,8 +192,14 @@ void runAttractionCommand(String command) {
      }
      else if(letter.equals("t")) {
        start = true;
-     }    
-    }
+     }  
+  }
+
+  //Stuur de acknowledgement status
+  else{
+    String ackStatus = "NACK";
+  }
+  Serial.println(ackStatus);
 }
 
 void setup() {
